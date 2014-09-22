@@ -151,8 +151,8 @@ interface HalCuriedRelationType extends RelationType {
 
 enum OzpRelationType implements HalCuriedRelationType {
     //defined relations for OZP should be enumerated here
-    APPLICATION('application'),
-    INTENT('intent'),
+    APPLICATION('applications'),
+    INTENT('intents'),
     USER('user'),
     APPLICATION_LIBRARY('application-library'),
     USER_DATA('data'),
@@ -169,7 +169,9 @@ enum OzpRelationType implements HalCuriedRelationType {
 
     //TODO determine if this can be put somewhere else so it doesn't need to be re-implemented
     //in each HalCuriedRelationType
-    String getRelationName() { "${halRelationCurie.name}:${name}" }
+    //TODO: had to remove the namespace from relationName for IWC compatibility - this will mess up the curies
+    //links...   so fix this post demo
+    String getRelationName() { "${name}" }
     public String toString() { relationName }
 
     int compareTo(RelationType other) {

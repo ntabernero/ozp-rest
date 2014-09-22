@@ -26,7 +26,8 @@ class IwcApiRepresentation extends SelfRefRepresentation<Profile> {
 
     private static HalEmbedded embedUser(Profile profile, ApplicationRootUriBuilderHolder uriBuilderHolder) {
         new HalEmbedded([
-                new AbstractMap.SimpleEntry(OzpRelationType.USER, new UserRepresentation(profile, uriBuilderHolder))
+                new AbstractMap.SimpleEntry(OzpRelationType.USER, new UserRepresentation(profile, uriBuilderHolder)),
+                new AbstractMap.SimpleEntry(OzpRelationType.SYSTEM, new IwcSystemRepresentation())
         ])
     }
 
@@ -44,7 +45,8 @@ class IwcApiRepresentation extends SelfRefRepresentation<Profile> {
                 createLink(OzpRelationType.APPLICATION, IwcResource.class, 'readApplicationsForCurrentUser'),
                 createLink(OzpRelationType.INTENT, IwcResource.class, 'readIntentsForApplicationsOfCurrentUser'),
                 createLink(OzpRelationType.USER_DATA, IwcDataObjectResource.class),
-                createLink(OzpRelationType.USER, ProfileResource.class, 'getOwnProfile')
+                createLink(OzpRelationType.USER, ProfileResource.class, 'getOwnProfile'),
+                createLink(OzpRelationType.SYSTEM, IwcSystemResource.class)
         ])
     }
 
