@@ -9,7 +9,9 @@ class LoginFilters {
     def filters = {
         login(controller: '*', action: '*') {
             before = {
-                profileRestService.login()
+                //disabling this for the demo because it
+                //isn't needed for now and it causes StaleObjectStateExceptions
+                //profileRestService.login()
             }
         }
     }
