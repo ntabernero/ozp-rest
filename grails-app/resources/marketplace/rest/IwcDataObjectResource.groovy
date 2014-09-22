@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriBuilder
 import javax.ws.rs.core.HttpHeaders
 
-@Path('api/profile/self/userData')
+@Path('api/data')
 class IwcDataObjectResource {
     @Autowired ProfileRestService profileRestService
 

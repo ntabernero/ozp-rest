@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
-@Path('/api/iwc')
+@Path('api')
 class IwcResource {
 
     @Autowired ApplicationLibraryEntryRestService libraryRestService
@@ -30,7 +30,7 @@ class IwcResource {
     }
 
     @GET
-    @Path('/intent')
+    @Path('/intents')
     @Produces([
         IntentRepresentation.MEDIA_TYPE,
         MediaType.APPLICATION_JSON
@@ -42,8 +42,11 @@ class IwcResource {
     }
 
     @GET
+    @Produces([
+            IwcApiRepresentation.MEDIA_TYPE,
+            MediaType.APPLICATION_JSON
+    ])
     Profile readIwcApi() {
         profileRestService.currentUserProfile
     }
-
 }

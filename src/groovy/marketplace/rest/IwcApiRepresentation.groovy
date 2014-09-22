@@ -25,20 +25,26 @@ class IwcApiRepresentation extends SelfRefRepresentation<Profile> {
     }
 
     private static HalEmbedded embedUser(Profile profile, ApplicationRootUriBuilderHolder uriBuilderHolder) {
-        new HalEmbedded([new AbstractMap.SimpleEntry(OzpRelationType.USER,
-                new UserRepresentation(profile, uriBuilderHolder))])
+        new HalEmbedded([
+                new AbstractMap.SimpleEntry(OzpRelationType.USER, new UserRepresentation(profile, uriBuilderHolder))
+        ])
     }
 
     private static HalLinks linkResources(ApplicationRootUriBuilderHolder uriBuilderHolder) {
-        def createLink = { OzpRelationType rel, Class resource, String method ->
-            URI href = uriBuilderHolder.builder.path(resource).path(resource, method).build()
+        def createLink = { OzpRelationType rel, Class resource, String method = null ->
+
+
+            URI href = method ? uriBuilderHolder.builder.path(resource).path(resource, method).build() :
+                    uriBuilderHolder.builder.path(resource).build()
 
             new AbstractMap.SimpleEntry(rel, new Link(href))
         }
 
         new HalLinks([
                 createLink(OzpRelationType.APPLICATION, IwcResource.class, 'readApplicationsForCurrentUser'),
-                createLink(OzpRelationType.INTENT, IwcResource.class, 'readIntentsForApplicationsOfCurrentUser')
+                createLink(OzpRelationType.INTENT, IwcResource.class, 'readIntentsForApplicationsOfCurrentUser'),
+                createLink(OzpRelationType.USER_DATA, IwcDataObjectResource.class),
+                createLink(OzpRelationType.USER, ProfileResource.class, 'getOwnProfile')
         ])
     }
 
