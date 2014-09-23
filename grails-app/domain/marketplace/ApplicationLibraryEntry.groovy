@@ -59,7 +59,8 @@ class ApplicationLibraryEntry implements Serializable, Comparable<ApplicationLib
                 title: serviceItem.title,
                 imageMediumUrl: serviceItem.imageMediumUrl,
                 imageLargeUrl: serviceItem.imageLargeUrl,
-                launchUrl: serviceItem.launchUrl
+                launchUrl: serviceItem.launchUrl,
+                uuid: serviceItem.uuid
             )
         )
     }
