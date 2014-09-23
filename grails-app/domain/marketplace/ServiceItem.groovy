@@ -225,34 +225,10 @@ class ServiceItem implements Serializable {
         })
         categories(nullable: true)
         uuid(nullable:false, matches: /^[A-Fa-f\d]{8}-[A-Fa-f\d]{4}-[A-Fa-f\d]{4}-[A-Fa-f\d]{4}-[A-Fa-f\d]{12}$/)
-        imageSmallUrl(nullable:true, maxSize:Constants.MAX_URL_SIZE, validator:{ val, obj ->
-            if(val?.trim()?.size() > 0 && !validateUrl(val)) {
-                return [
-                    'serviceItem.imageSmallUrl.url.invalid'
-                ]
-            }
-        })
-        imageMediumUrl(nullable:true, maxSize:Constants.MAX_URL_SIZE, validator:{ val, obj ->
-            if(val?.trim()?.size() > 0 && !validateUrl(val)) {
-                return [
-                    'serviceItem.imageLargeUrl.url.invalid'
-                ]
-            }
-        })
-        imageLargeUrl(nullable:true, maxSize:Constants.MAX_URL_SIZE, validator:{ val, obj ->
-            if(val?.trim()?.size() > 0 && !validateUrl(val)) {
-                return [
-                    'serviceItem.imageLargeUrl.url.invalid'
-                ]
-            }
-        })
-        imageXlargeUrl(nullable:true, maxSize:Constants.MAX_URL_SIZE, validator:{ val, obj ->
-            if(val?.trim()?.size() > 0 && !validateUrl(val)) {
-                return [
-                    'serviceItem.imageXlargeUrl.url.invalid'
-                ]
-            }
-        })
+        imageSmallUrl nullable: true, maxSize:Constants.MAX_URL_SIZE
+        imageMediumUrl nullable:true, maxSize: Constants.MAX_URL_SIZE
+        imageLargeUrl nullable:true, maxSize: Constants.MAX_URL_SIZE
+        imageXlargeUrl nullable:true, maxSize: Constants.MAX_URL_SIZE
         approvalStatus(inList:Constants.APPROVAL_STATUSES.values().toList())
         lastActivity(nullable:true)
         approvedDate(nullable:true)
@@ -405,6 +381,11 @@ class ServiceItem implements Serializable {
                 }
             }
         }
+    }
+
+    //TODO: this should be removed after the demo and approval workflow is reinstated
+    def beforeInsert() {
+        approvedDate = new Date()
     }
 
     /**
