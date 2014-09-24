@@ -27,7 +27,7 @@ class IwcApiRepresentation extends SelfRefRepresentation<Profile> {
     private static HalEmbedded embedUser(Profile profile, ApplicationRootUriBuilderHolder uriBuilderHolder) {
         new HalEmbedded([
                 new AbstractMap.SimpleEntry(OzpRelationType.USER, new UserRepresentation(profile, uriBuilderHolder)),
-                new AbstractMap.SimpleEntry(OzpRelationType.SYSTEM, new IwcSystemRepresentation())
+                new AbstractMap.SimpleEntry(OzpRelationType.SYSTEM, new IwcSystemRepresentation(uriBuilderHolder))
         ])
     }
 
