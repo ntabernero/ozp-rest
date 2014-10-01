@@ -63,6 +63,9 @@ node_modules
 js-build
 .vagrant
 data/
+.gradle
+build
+buildPlugins
 
 # Project files
 ######################
